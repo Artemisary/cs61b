@@ -1,5 +1,5 @@
 /**
- * Created by jug on 1/22/18.
+ * Created by jug on 1/22/18. The problem is in the foods.csv ,one of the foods is negative.
  */
 public class DebugExercise3 {
     public static int countTurnips(In in) {
