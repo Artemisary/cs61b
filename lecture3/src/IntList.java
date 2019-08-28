@@ -7,31 +7,37 @@ public class IntList {
         rest = r;
     }
 
-    /** Return the size of the list using... recursion! */
+    /**
+     * Return the size of the list using... recursion!
+     */
     public int size() {
-        if(this.rest==null){
+        if (this.rest == null) {
             return 1;
         }
         return 1 + this.rest.size();
     }
 
-    /** Return the size of the list using no recursion! */
+    /**
+     * Return the size of the list using no recursion!
+     */
     public int iterativeSize() {
         IntList P = this;
         int iterativeSize = 1;
-        while(P.rest!=null){
+        while (P.rest != null) {
             iterativeSize = iterativeSize + 1;
             P = P.rest;
         }
         return iterativeSize;
     }
 
-    /** Returns the ith value in this list.*/
+    /**
+     * Returns the ith value in this list.
+     */
     public int get(int i) {
-        if(i==1){
+        if (i == 1) {
             return this.first;
         }
-        return this.rest.get(i-1);
+        return this.rest.get(i - 1);
     }
 
     public static void main(String[] args) {
