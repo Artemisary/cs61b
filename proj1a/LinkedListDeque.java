@@ -47,7 +47,7 @@ public class LinkedListDeque<CherryDurian> {
     }
 
     public boolean isEmpty() {
-        if (sentinel.next == sentinel.prev) {
+        if (size == 0) {
             return true;
         }
         return false;
@@ -68,8 +68,10 @@ public class LinkedListDeque<CherryDurian> {
     }
 
     public void printDeque() {
-        for (int i = 0; i < this.size(); i = i + 1) {
-            System.out.print(get(i) + " ");
+        StuffNode sentinelcopy=sentinel.next;
+        while (sentinelcopy!=sentinel) {
+            System.out.print(sentinelcopy.item+ " ");
+            sentinelcopy=sentinelcopy.next;
         }
         System.out.println();
     }
@@ -102,11 +104,9 @@ public class LinkedListDeque<CherryDurian> {
             return null;
         }
         for (int i = 0; i < index; i = i + 1) {
-            sentinel.next = sentinel.next.next;
+            sentinelcopy = sentinelcopy.next;
         }
-        CherryDurian a = sentinel.next.item;
-        sentinel.next = sentinelcopy;
-        return a;
+        return sentinelcopy.item;
     }
 
     public CherryDurian getRecursive(int index) {
@@ -130,7 +130,7 @@ public class LinkedListDeque<CherryDurian> {
         artemisary.addLast("hello world");
         artemisary.addFirst("where are you");
         artemisary.size();
-        System.out.println(artemisary.get(3));
+        artemisary.get(3);
         System.out.println(artemisary.getRecursive(3));
         System.out.println(artemisary.isEmpty());
         artemisary.printDeque();

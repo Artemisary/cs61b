@@ -47,7 +47,8 @@ public class ArrayDeque<CherryDurian> {
                 items[i] = null;
             }
             nextLast = size + nextLast;
-        } else {
+        }
+        else {
             nextFirst = items.length - 1;
             nextLast = size;
         }
