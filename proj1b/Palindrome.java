@@ -27,21 +27,20 @@ public class Palindrome {
     }
     public boolean isPalindrome(String word, CharacterComparator cc) {
         Deque<Character> b = wordToDeque(word);
-        if(word.length()<=3){
-            if(cc.equalChars(b.removeFirst(),b.removeLast())){
-                return isPalindrome(word,cc);
+        if(word.length()>=2){
+            if(!cc.equalChars(b.removeFirst(),b.removeLast())){
+                return false;
             }
-            return false;
+            word=word.substring(1,word.length()-1);
+            return isPalindrome(word,cc);
         }
-        if(!cc.equalChars(b.removeFirst(),b.removeLast())){
-            return false;
-        }
-        word=word.substring(1,word.length()-2);
-        return isPalindrome(word,cc);
+        return true;
     }
 
     public static void main(String[] args) {
         Palindrome palindrome = new Palindrome();
-        palindrome.isPalindrome("cattac");
+        OffByOne offbyone = new OffByOne();
+
+        palindrome.isPalindrome("flake",offbyone);
     }
 }
