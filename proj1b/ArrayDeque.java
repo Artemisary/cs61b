@@ -3,7 +3,7 @@
  *
  * @author Josh Hug
  */
-public class ArrayDeque<CherryDurian> implements Deque<CherryDurian>{
+public class ArrayDeque<CherryDurian> implements Deque<CherryDurian> {
     private CherryDurian[] items;
     private int nextFirst;
     private int nextLast;
@@ -48,8 +48,7 @@ public class ArrayDeque<CherryDurian> implements Deque<CherryDurian>{
                 items[i] = null;
             }
             nextLast = size + nextLast;
-        }
-        else {
+        } else {
             nextFirst = items.length - 1;
             nextLast = size;
         }

@@ -1,5 +1,5 @@
 
-public class LinkedListDeque<CherryDurian> implements Deque<CherryDurian>{
+public class LinkedListDeque<CherryDurian> implements Deque<CherryDurian> {
     private class StuffNode {
         private CherryDurian item;
         private StuffNode prev;
@@ -20,6 +20,7 @@ public class LinkedListDeque<CherryDurian> implements Deque<CherryDurian>{
         sentinel.prev = sentinel;
         size = 0;
     }
+
     @Override
     public void addFirst(CherryDurian x) {
         StuffNode sentinelnextcopy = sentinel.next;
@@ -36,6 +37,7 @@ public class LinkedListDeque<CherryDurian> implements Deque<CherryDurian>{
         }
         return sentinel.next.item;
     }
+
     @Override
     public void addLast(CherryDurian x) {
         StuffNode sentinelprevcopy = sentinel.prev;
@@ -45,6 +47,7 @@ public class LinkedListDeque<CherryDurian> implements Deque<CherryDurian>{
         sentinel.prev.prev = sentinelprevcopy;
         sentinelprevcopy.next = sentinel.prev;
     }
+
     @Override
     public boolean isEmpty() {
         if (size == 0) {
@@ -66,18 +69,20 @@ public class LinkedListDeque<CherryDurian> implements Deque<CherryDurian>{
             addLast((CherryDurian) other.get(i));
         }
     }
+
     @Override
     public void printDeque() {
-        StuffNode sentinelcopy=sentinel.next;
-        while (sentinelcopy!=sentinel) {
-            System.out.print(sentinelcopy.item+ " ");
-            sentinelcopy=sentinelcopy.next;
+        StuffNode sentinelcopy = sentinel.next;
+        while (sentinelcopy != sentinel) {
+            System.out.print(sentinelcopy.item + " ");
+            sentinelcopy = sentinelcopy.next;
         }
         System.out.println();
     }
+
     @Override
     public CherryDurian removeFirst() {
-        if (size==0) {
+        if (size == 0) {
             return null;
         }
         size = size - 1;
@@ -86,9 +91,10 @@ public class LinkedListDeque<CherryDurian> implements Deque<CherryDurian>{
         sentinel.next = sentinel.next.next;
         return a;
     }
+
     @Override
     public CherryDurian removeLast() {
-        if (size==0) {
+        if (size == 0) {
             return null;
         }
         size = size - 1;
@@ -97,6 +103,7 @@ public class LinkedListDeque<CherryDurian> implements Deque<CherryDurian>{
         sentinel.prev = sentinel.prev.prev;
         return a;
     }
+
     @Override
     public CherryDurian get(int index) {
         StuffNode sentinelcopy = sentinel.next;
