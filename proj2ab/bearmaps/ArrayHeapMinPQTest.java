@@ -9,16 +9,17 @@ import static org.junit.Assert.*;
  */
 public class ArrayHeapMinPQTest {
     @Test
-    public void testAdd(){
+    public void testAdd() {
         ArrayHeapMinPQ<Integer> minHeap = new ArrayHeapMinPQ<>();
-        minHeap.add(1,1);
-        minHeap.add(2,2);
-        minHeap.add(3,3);
-        minHeap.add(4,4);
-        minHeap.add(5,2);
-        minHeap.add(6,3);
-        assertEquals(6,minHeap.size());
+        minHeap.add(1, 1);
+        minHeap.add(2, 2);
+        minHeap.add(3, 3);
+        minHeap.add(4, 4);
+        minHeap.add(5, 2);
+        minHeap.add(6, 3);
+        assertEquals(6, minHeap.size());
     }
+
     @Test
     public void testContains() {
         ArrayHeapMinPQ<Integer> minHeap = new ArrayHeapMinPQ<>();
@@ -70,6 +71,5 @@ public class ArrayHeapMinPQTest {
         minHeap.changePriority(6, 0);
         assertTrue(minHeap.getSmallest() == 6);
     }
-
-
 }
+

@@ -1,16 +1,18 @@
 package bearmaps;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.HashMap;ss
 import java.util.NoSuchElementException;
 /**Attention: Integer with a==b compares the address of a and b, a.equals(b) compares the value of a and b.
  *Because of the range of Integer is form -128 to 127. So in the contain function I use equals.
+ *I use HashMap because of the find function in HashMap is O(1).
  */
 public class ArrayHeapMinPQ<T> implements ExtrinsicMinPQ<T> {
-
+    private HashMap<T,Integer> itemPQMap;
     private ArrayList<PriorityNode> itemPQ;
 
     public ArrayHeapMinPQ() {
+        itemPQMap=new HashMap<>();
         itemPQ = new ArrayList<>();
     }
 
@@ -20,6 +22,7 @@ public class ArrayHeapMinPQ<T> implements ExtrinsicMinPQ<T> {
             throw new IllegalArgumentException();
         }
         itemPQ.add(new PriorityNode(item, priority));
+        itemPQMap.put(item,size()-1);
         swim(size() - 1);
     }
 
@@ -28,12 +31,7 @@ public class ArrayHeapMinPQ<T> implements ExtrinsicMinPQ<T> {
         if (isEmpty()) {
             return false;
         }
-        for(int i=0;i<itemPQ.size();i++){
-            if(itemPQ.get(i).getItem().equals(item)){
-                return true;
-            }
-        }
-        return false;
+        return itemPQMap.containsKey(item);
     }
 
     @Override
@@ -52,6 +50,7 @@ public class ArrayHeapMinPQ<T> implements ExtrinsicMinPQ<T> {
         T toRemove = itemPQ.get(0).getItem();
         swap(0, size() - 1);
         itemPQ.remove(size() - 1);
+        itemPQMap.remove(toRemove);
         sink(0);
         return toRemove;
     }
@@ -63,18 +62,10 @@ public class ArrayHeapMinPQ<T> implements ExtrinsicMinPQ<T> {
 
     @Override
     public void changePriority(T item, double priority) {
-        if (isEmpty() ) {
+        if (isEmpty()||!contains(item)){
             throw new NoSuchElementException();
         }
-        int index=-1;
-        for (int i=0;i<itemPQ.size();i++){
-            if(itemPQ.get(i).getItem().equals(item)){
-                index = itemPQ.get(i).getKey();
-                break;
-            }
-        }
-        if(index==-1)
-            throw new NoSuchElementException();
+        int index=itemPQMap.get(item);
         double oldPriority = itemPQ.get(index).getPriority();
         itemPQ.get(index).setPriority(priority);
         if (oldPriority < priority) {
@@ -86,11 +77,9 @@ public class ArrayHeapMinPQ<T> implements ExtrinsicMinPQ<T> {
     private class PriorityNode {
         private T item;
         private double priority;
-        private int key;
         PriorityNode(T item, double priority) {
             this.item = item;
             this.priority = priority;
-            this.key = itemPQ.size();
         }
 
         T getItem() {
@@ -100,14 +89,8 @@ public class ArrayHeapMinPQ<T> implements ExtrinsicMinPQ<T> {
         double getPriority() {
             return priority;
         }
-        int getKey(){
-            return key;
-        }
         void setPriority(double priority) {
             this.priority = priority;
-        }
-        void setKey(int key){
-            this.key=key;
         }
     }
 
@@ -157,8 +140,8 @@ public class ArrayHeapMinPQ<T> implements ExtrinsicMinPQ<T> {
         PriorityNode temp = itemPQ.get(i);
         itemPQ.set(i, itemPQ.get(j));
         itemPQ.set(j, temp);
-        itemPQ.get(i).setKey(i);
-        itemPQ.get(j).setKey(j);
+        itemPQMap.put(itemPQ.get(i).getItem(),i);
+        itemPQMap.put(itemPQ.get(j).getItem(),j);
     }
 
     private boolean smaller(int i, int j) {
